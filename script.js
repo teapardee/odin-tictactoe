@@ -9,14 +9,15 @@ const createPlayer = (position, name, marker) => {
 var gameBoard = (function () {
   //cache DOM & create tiles
   const gameContainer = document.getElementById('game-container');
+  let playerOneTurn = '';
+  const game = [];
 
   _init();
 
-  //player selections
-  var selection = ['X', 'O', '', 'X', '', '', 'O', 'X', 'O'];
-
   function _init() {
+    playerOneTurn = true;
     for (i = 0; i < 9; i++) {
+      game.push(' ');
       var gameTile = document.createElement('div');
       gameTile.className = 'tiles';
       gameTile.dataset.indexNumber = i;
@@ -25,25 +26,53 @@ var gameBoard = (function () {
     }
   }
 
-  function _render() {
-    for (i = 0; i < 9; i++) {
-      var currentTile = document.querySelector(`[data-index-number='${i}`);
-      currentTile.innerHTML = `${selection[i]}`;
+  function _togglePlayer() {
+    playerOneTurn = !playerOneTurn;
+  }
+
+  function _checkTile(indexNumber) {
+    let tileValue = game[indexNumber];
+    return tileValue === ' ' ? true : false;
+  }
+
+  function tileSelection(e) {
+    let indexNumber = e.currentTarget.getAttribute('data-index-number');
+
+    if (_checkTile(indexNumber) === true) {
+      if (playerOneTurn === true) {
+        game[indexNumber] = 'X';
+      } else {
+        game[indexNumber] = 'O';
+      }
+      _togglePlayer();
+      render();
     }
   }
 
-  function tileSelection() {
+  function render() {
+    for (i = 0; i < 9; i++) {
+      var currentTile = document.querySelector(`[data-index-number='${i}`);
+      currentTile.innerHTML = `${game[i]}`;
+    }
+    console.log(game);
+  }
+
+  function resetBoard() {
     console.log('future function');
-    _render();
+    game = [];
+    render();
   }
 
   return {
-    tileSelection: tileSelection,
+    render,
+    resetBoard,
   };
 })();
 
 // Controls Flow of Game
 
-var gameFlow = (function () {
-  console.log('furture game flow');
+var gameController = (function () {
+  console.log('future game flow');
+
+  return {};
 })();
