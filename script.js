@@ -11,6 +11,16 @@ var gameBoard = (function () {
   const gameContainer = document.getElementById('game-container');
   let playerOneTurn = '';
   const game = [];
+  const winningCombos = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 5, 6],
+  ];
 
   _init();
 
@@ -45,8 +55,24 @@ var gameBoard = (function () {
         game[indexNumber] = 'O';
       }
       _togglePlayer();
+      _checkForWinner();
       render();
     }
+  }
+
+  function _retrieveMarkerPositions(inputMarker) {
+    let m = inputMarker;
+    return game.reduce(function (acc, curr, index, marker) {
+      if (curr === m) {
+        acc.push(index);
+      }
+      return acc;
+    }, []);
+  }
+
+  function _checkForWinner() {
+    let xValues = _retrieveMarkerPositions('X');
+    console.log(xValues);
   }
 
   function render() {
@@ -54,7 +80,6 @@ var gameBoard = (function () {
       var currentTile = document.querySelector(`[data-index-number='${i}`);
       currentTile.innerHTML = `${game[i]}`;
     }
-    console.log(game);
   }
 
   function resetBoard() {
