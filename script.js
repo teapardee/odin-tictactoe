@@ -51,11 +51,12 @@ var gameBoard = (function () {
     if (_checkTile(indexNumber) === true) {
       if (playerOneTurn === true) {
         game[indexNumber] = 'X';
+        _checkForWinner('X');
       } else {
         game[indexNumber] = 'O';
+        _checkForWinner('O');
       }
       _togglePlayer();
-      _checkForWinner();
       render();
     }
   }
@@ -70,9 +71,27 @@ var gameBoard = (function () {
     }, []);
   }
 
-  function _checkForWinner() {
-    let xValues = _retrieveMarkerPositions('X');
-    console.log(xValues);
+  function _checkForWinner(activeMarker) {
+    // retrieve array of active player's positions
+    let markerPositions = _retrieveMarkerPositions(activeMarker);
+
+    //compare winning combos to active player's positions
+    for (var i = 0; i < winningCombos.length; i++) {
+      if (winningCombos[i].every((r) => markerPositions.includes(r))) {
+        _renderWinner(winningCombos[i]);
+      }
+    }
+  }
+
+  function _renderWinner(args) {
+    const newArr = args;
+    console.log(newArr);
+    for (i = 0; i < newArr.length; i++) {
+      var currentTile = document.querySelector(
+        `[data-index-number='${newArr[i]}`
+      );
+      currentTile.style.backgroundColor = 'green';
+    }
   }
 
   function render() {

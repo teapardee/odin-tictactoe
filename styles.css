@@ -46,3 +46,7 @@ h1 {
 .tiles:hover {
   background-color: lightgray;
 }
+
+.winning-tile {
+  background-color: lightgreen;
+}
