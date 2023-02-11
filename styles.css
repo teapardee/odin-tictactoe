@@ -33,6 +33,16 @@ h1 {
   background-color: white;
 }
 
+#setup-modal {
+  display: none;
+  min-height: 50vh;
+  min-width: 50vh;
+  z-index: 1;
+  background-color: lightblue;
+}
+
+/* Tiles */
+
 .tiles {
   display: flex;
   background-color: grey;
@@ -49,4 +59,26 @@ h1 {
 
 .winning-tile {
   background-color: lightgreen;
+}
+
+/* Button */
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 50vh;
+  min-width: 50vh;
+}
+
+.reset-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  height: 3vh;
+  width: 10vh;
+  background-color: lightblue;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
 }

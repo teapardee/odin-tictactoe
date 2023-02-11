@@ -10,7 +10,7 @@ var gameBoard = (function () {
   //Cache DOM & Initialize Variables
 
   const gameContainer = document.getElementById('game-container');
-  const game = [];
+  var game = [];
 
   _init();
 
@@ -30,6 +30,7 @@ var gameBoard = (function () {
 
   function updatePosition(index, marker) {
     game[index] = marker;
+    render();
   }
 
   function checkTile(indexNumber) {
@@ -50,7 +51,6 @@ var gameBoard = (function () {
 
   function renderWinner(args) {
     const newArr = args;
-    console.log(newArr);
     for (i = 0; i < newArr.length; i++) {
       var currentTile = document.querySelector(
         `[data-index-number='${newArr[i]}`
@@ -63,12 +63,16 @@ var gameBoard = (function () {
     for (i = 0; i < 9; i++) {
       var currentTile = document.querySelector(`[data-index-number='${i}`);
       currentTile.innerHTML = `${game[i]}`;
+      currentTile.style.backgroundColor = 'grey';
     }
   }
 
   function resetBoard() {
     console.log('future function');
     game = [];
+    for (i = 0; i < 9; i++) {
+      game[i] = ' ';
+    }
     render();
   }
 
@@ -112,13 +116,13 @@ var gameController = (function () {
     for (var i = 0; i < winningCombos.length; i++) {
       if (winningCombos[i].every((r) => markerPositions.includes(r))) {
         gameBoard.renderWinner(winningCombos[i]);
-        _stopGame();
+        stopGame();
       }
     }
   }
 
-  function _stopGame() {
-    winnerDeclared = true;
+  function stopGame() {
+    winnerDeclared = !winnerDeclared;
   }
 
   function tileSelection(e) {
@@ -133,8 +137,28 @@ var gameController = (function () {
         _checkForWinner('O');
       }
       _toggleTurn();
-      gameBoard.render();
     }
   }
-  return { tileSelection };
+  return { tileSelection, stopGame };
+})();
+
+// Display Controller
+
+var displayController = (function () {
+  const resetBtn = document.querySelector('.reset-btn');
+
+  _init();
+
+  function _init() {
+    resetBtn.addEventListener('click', fullReset);
+  }
+
+  function fullReset() {
+    gameBoard.resetBoard();
+    gameController.stopGame();
+  }
+
+  return {
+    fullReset,
+  };
 })();
