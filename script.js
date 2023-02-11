@@ -67,8 +67,7 @@ var gameBoard = (function () {
     }
   }
 
-  function resetBoard() {
-    console.log('future function');
+  function resetGameBoard() {
     game = [];
     for (i = 0; i < 9; i++) {
       game[i] = ' ';
@@ -82,7 +81,7 @@ var gameBoard = (function () {
     updatePosition,
     checkTile,
     reducePositions,
-    resetBoard,
+    resetGameBoard,
   };
 })();
 
@@ -102,7 +101,7 @@ var gameController = (function () {
     [1, 4, 7],
     [2, 5, 8],
     [0, 4, 8],
-    [2, 5, 6],
+    [2, 4, 6],
   ];
 
   function _toggleTurn() {
@@ -122,12 +121,16 @@ var gameController = (function () {
   }
 
   function stopGame() {
-    winnerDeclared = !winnerDeclared;
+    winnerDeclared = true;
+  }
+
+  function resetGameController() {
+    playerOneTurn = '';
+    winnerDeclared = false;
   }
 
   function tileSelection(e) {
     let indexNumber = e.currentTarget.getAttribute('data-index-number');
-
     if (gameBoard.checkTile(indexNumber) === true && winnerDeclared === false) {
       if (playerOneTurn === true) {
         gameBoard.updatePosition(indexNumber, 'X');
@@ -139,7 +142,7 @@ var gameController = (function () {
       _toggleTurn();
     }
   }
-  return { tileSelection, stopGame };
+  return { tileSelection, stopGame, resetGameController };
 })();
 
 // Display Controller
@@ -154,8 +157,8 @@ var displayController = (function () {
   }
 
   function fullReset() {
-    gameBoard.resetBoard();
-    gameController.stopGame();
+    gameController.resetGameController();
+    gameBoard.resetGameBoard();
   }
 
   return {
