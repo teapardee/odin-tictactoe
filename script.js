@@ -7,7 +7,8 @@ const createPlayer = (position, name, marker) => {
 // Gameboard Module
 
 var gameBoard = (function () {
-  //cache DOM & create tiles
+  //Cache DOM & Initialize Variables
+
   const gameContainer = document.getElementById('game-container');
   let playerOneTurn = '';
   const game = [];
@@ -36,7 +37,7 @@ var gameBoard = (function () {
     }
   }
 
-  function _togglePlayer() {
+  function _toggleTurn() {
     playerOneTurn = !playerOneTurn;
   }
 
@@ -56,11 +57,12 @@ var gameBoard = (function () {
         game[indexNumber] = 'O';
         _checkForWinner('O');
       }
-      _togglePlayer();
+      _toggleTurn();
       render();
     }
   }
 
+  // Create an array of index positions for a given marker
   function _retrieveMarkerPositions(inputMarker) {
     let m = inputMarker;
     return game.reduce(function (acc, curr, index, marker) {
@@ -72,10 +74,9 @@ var gameBoard = (function () {
   }
 
   function _checkForWinner(activeMarker) {
-    // retrieve array of active player's positions
     let markerPositions = _retrieveMarkerPositions(activeMarker);
 
-    //compare winning combos to active player's positions
+    //Compare winning combos array to active player's positions
     for (var i = 0; i < winningCombos.length; i++) {
       if (winningCombos[i].every((r) => markerPositions.includes(r))) {
         _renderWinner(winningCombos[i]);
@@ -90,7 +91,7 @@ var gameBoard = (function () {
       var currentTile = document.querySelector(
         `[data-index-number='${newArr[i]}`
       );
-      currentTile.style.backgroundColor = 'green';
+      currentTile.style.backgroundColor = 'rgba(0, 128, 0, 0.7)';
     }
   }
 
