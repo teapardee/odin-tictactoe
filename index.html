@@ -11,8 +11,19 @@
   </head>
   <body>
     <h1>TIC TAC TOE</h1>
-    <div id="setup-modal"></div>
-    <div id="game-container"></div>
-    <div class="button-container"><div class="reset-btn">RESET</div></div>
+
+    <div id="main-wrapper">
+      <div id="winner-screen">
+        <div>PLAYER 1 WINS</div>
+        <div>
+          <button class="winner btn">Replay</button
+          ><button class="winner btn">Change Teams</button>
+        </div>
+      </div>
+      <div id="setup-screen"></div>
+      <div id="game-screen"></div>
+    </div>
+
+    <div class="button-wrapper"><div class="reset btn">RESET</div></div>
   </body>
 </html>

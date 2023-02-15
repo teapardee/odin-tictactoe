@@ -7,9 +7,9 @@ const createPlayer = (position, name, marker) => {
 // Gameboard Module
 
 var gameBoard = (function () {
-  //Cache DOM & Initialize Variables
+  //Initialize variables & gameboard
 
-  const gameContainer = document.getElementById('game-container');
+  const gameContainer = document.getElementById('game-screen');
   var game = [];
 
   _init();
@@ -120,6 +120,12 @@ var gameController = (function () {
     }
   }
 
+  // function _checkForTie() {
+  //   for(i=0;i<9,i++){
+
+  //   }
+  // }
+
   function stopGame() {
     winnerDeclared = true;
   }
@@ -140,6 +146,7 @@ var gameController = (function () {
         _checkForWinner('O');
       }
       _toggleTurn();
+    } else {
     }
   }
   return { tileSelection, stopGame, resetGameController };

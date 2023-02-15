@@ -7,7 +7,12 @@
   font-size: 62.5%;
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 2px;
-  color: var(--secondary-color);
+
+  --secondary-color: #2c323d;
+}
+
+button {
+  all: unset;
 }
 
 body {
@@ -24,21 +29,19 @@ h1 {
   margin: 10rem 0 4rem 0;
 }
 
-#game-container {
-  min-height: 50vh;
-  min-width: 50vh;
+/* Screens */
+
+#main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-screen {
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
   gap: 5px;
   background-color: white;
-}
-
-#setup-modal {
-  display: none;
-  min-height: 50vh;
-  min-width: 50vh;
-  z-index: 1;
-  background-color: lightblue;
 }
 
 /* Tiles */
@@ -57,28 +60,72 @@ h1 {
   background-color: lightgray;
 }
 
-.winning-tile {
-  background-color: lightgreen;
+#winner-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 20vh;
+  min-width: 60vh;
+  color: white;
+  background-color: var(--secondary-color);
 }
 
-/* Button */
+#winner-screen > div {
+  display: flex;
+  flex: 1;
+  font-size: 2rem;
 
-.button-container {
+  justify-content: center;
+  align-items: center;
+}
+
+#setup-screen {
+  display: none;
+  background-color: lightblue;
+}
+
+#game-screen,
+#setup-screen {
+  min-height: 50vh;
+  min-width: 50vh;
+}
+
+#setup-screen,
+#winner-screen {
+  position: absolute;
+  z-index: 1;
+}
+
+/* Buttons */
+
+.button-wrapper {
   display: flex;
   justify-content: flex-end;
   min-height: 50vh;
   min-width: 50vh;
 }
 
-.reset-btn {
+.btn {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.reset {
   margin-top: 1rem;
   height: 3vh;
   width: 10vh;
   background-color: lightblue;
-  font-size: 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
+}
+
+.winner {
+  margin: 1rem;
+  height: 3vh;
+  width: 20vh;
+  background-color: white;
+  color: var(--secondary-color);
 }
