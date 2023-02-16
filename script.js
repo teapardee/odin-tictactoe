@@ -196,4 +196,5 @@ var displayController = (function () {
     announceWinner,
     fullReset,
   };
+  gi;
 })();

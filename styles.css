@@ -37,14 +37,22 @@ h1 {
   align-items: center;
 }
 
+#setup-screen,
+#winner-screen {
+  position: absolute;
+  z-index: 1;
+}
+
+/* Gameboard */
+
 #game-screen {
   display: grid;
+  min-height: 50vh;
+  min-width: 50vh;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
   gap: 5px;
   background-color: white;
 }
-
-/* Tiles */
 
 .tiles {
   display: flex;
@@ -59,6 +67,8 @@ h1 {
 .tiles:hover {
   background-color: lightgray;
 }
+
+/* Winner Screen */
 
 #winner-screen {
   display: none;
@@ -79,21 +89,54 @@ h1 {
   align-items: center;
 }
 
+/* Setup Screen */
+
 #setup-screen {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: 50vh;
+  min-width: 70vh;
   background-color: lightblue;
 }
 
-#game-screen,
-#setup-screen {
-  min-height: 50vh;
-  min-width: 50vh;
+h4 {
+  font-size: 2rem;
+  margin: 1rem;
 }
 
-#setup-screen,
-#winner-screen {
-  position: absolute;
-  z-index: 1;
+h6 {
+  font-size: 3rem;
+}
+
+.setup-container {
+  display: flex;
+  text-align: center;
+}
+
+#player-two {
+  margin-left: 2rem;
+}
+
+#player-one,
+#player-two {
+  background-color: white;
+}
+
+.marker-selector {
+  display: flex;
+  background-color: white;
+}
+
+.marker-selector > .tiles {
+  height: 12vh;
+  width: 12vh;
+  margin: 1rem;
+}
+
+.marker-selector > .tiles: {
+  border: 2px solid black;
 }
 
 /* Buttons */
@@ -124,6 +167,13 @@ h1 {
 .winner {
   margin: 1rem;
   height: 3vh;
+  width: 20vh;
+  background-color: white;
+  color: var(--secondary-color);
+}
+
+.begin {
+  height: 5vh;
   width: 20vh;
   background-color: white;
   color: var(--secondary-color);
