@@ -66,6 +66,19 @@ h1 {
 
 .tiles:hover {
   background-color: lightgray;
+  cursor: pointer;
+}
+
+.selected {
+  border: 5px solid var(--secondary-color);
+}
+
+.unselected {
+  background-color: lightgrey;
+}
+
+.selected:hover {
+  background-color: grey;
 }
 
 /* Winner Screen */
@@ -135,10 +148,6 @@ h6 {
   margin: 1rem;
 }
 
-.marker-selector > .tiles: {
-  border: 2px solid black;
-}
-
 /* Buttons */
 
 .button-wrapper {
@@ -155,6 +164,10 @@ h6 {
   font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+.btn:hover {
+  scale: 1.05;
 }
 
 .reset {

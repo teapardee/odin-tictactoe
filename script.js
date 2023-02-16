@@ -168,6 +168,10 @@ var displayController = (function () {
   const winnerScreen = document.getElementById('winner-screen');
   const resetBtn = document.getElementById('reset-btn');
   const replayBtn = document.getElementById('replay-btn');
+  const p1x = document.getElementById('p1x');
+  const p1o = document.getElementById('p1o');
+  const p2x = document.getElementById('p2x');
+  const p2o = document.getElementById('p2o');
 
   _init();
 
@@ -176,6 +180,38 @@ var displayController = (function () {
     resetBtn.style.display = 'none';
     resetBtn.addEventListener('click', fullReset);
     replayBtn.addEventListener('click', fullReset);
+    p1x.addEventListener('click', (e) => {
+      return _markerSelection(e);
+    });
+    p1o.addEventListener('click', (e) => {
+      return _markerSelection(e);
+    });
+    p2x.addEventListener('click', (e) => {
+      return _markerSelection(e);
+    });
+    p2o.addEventListener('click', (e) => {
+      return _markerSelection(e);
+    });
+  }
+
+  function _markerSelection(e) {
+    let target = e.currentTarget.getAttribute('id');
+    switch (target) {
+      case 'p1x':
+      case 'p2o':
+        p1x.className = 'tiles selected';
+        p2o.className = 'tiles selected';
+        p1o.className = 'tiles unselected';
+        p2x.className = 'tiles unselected';
+        break;
+      case 'p1o':
+      case 'p2x':
+        p1o.className = 'tiles selected';
+        p2x.className = 'tiles selected';
+        p1x.className = 'tiles unselected';
+        p2o.className = 'tiles unselected';
+        break;
+    }
   }
 
   function announceWinner() {
@@ -196,5 +232,4 @@ var displayController = (function () {
     announceWinner,
     fullReset,
   };
-  gi;
 })();
