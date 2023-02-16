@@ -51,6 +51,14 @@ var gameBoard = (function () {
     }, []);
   }
 
+  function render() {
+    for (i = 0; i < 9; i++) {
+      var currentTile = document.querySelector(`[data-index-number='${i}`);
+      currentTile.innerHTML = `${game[i]}`;
+      currentTile.style.backgroundColor = 'grey';
+    }
+  }
+
   function renderWinner(args) {
     const newArr = args;
     for (i = 0; i < newArr.length; i++) {
@@ -58,14 +66,6 @@ var gameBoard = (function () {
         `[data-index-number='${newArr[i]}`
       );
       currentTile.style.backgroundColor = 'rgba(0, 128, 0, 0.7)';
-    }
-  }
-
-  function render() {
-    for (i = 0; i < 9; i++) {
-      var currentTile = document.querySelector(`[data-index-number='${i}`);
-      currentTile.innerHTML = `${game[i]}`;
-      currentTile.style.backgroundColor = 'grey';
     }
   }
 
@@ -78,11 +78,11 @@ var gameBoard = (function () {
   }
 
   return {
-    render,
-    renderWinner,
     updatePosition,
     checkTile,
     reducePositions,
+    render,
+    renderWinner,
     resetGameBoard,
   };
 })();
@@ -162,10 +162,9 @@ var gameController = (function () {
 // Display Controller
 
 var displayController = (function () {
-  //Intialize Variables
-  let showWinnerScreen = false;
-
   //Cache DOM
+
+  const setupScreen = document.getElementById('setup-screen');
   const winnerScreen = document.getElementById('winner-screen');
   const resetBtn = document.getElementById('reset-btn');
   const replayBtn = document.getElementById('replay-btn');
@@ -173,13 +172,17 @@ var displayController = (function () {
   _init();
 
   function _init() {
+    setupScreen.style.display = 'flex';
+    resetBtn.style.display = 'none';
     resetBtn.addEventListener('click', fullReset);
     replayBtn.addEventListener('click', fullReset);
   }
 
   function announceWinner() {
-    winnerScreen.style.display = 'flex';
     resetBtn.style.display = 'none';
+    setTimeout(function () {
+      winnerScreen.style.display = 'flex';
+    }, 500);
   }
 
   function fullReset() {
@@ -190,7 +193,7 @@ var displayController = (function () {
   }
 
   return {
-    fullReset,
     announceWinner,
+    fullReset,
   };
 })();
