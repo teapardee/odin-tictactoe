@@ -61,7 +61,7 @@ h1 {
 }
 
 #winner-screen {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -75,7 +75,6 @@ h1 {
   display: flex;
   flex: 1;
   font-size: 2rem;
-
   justify-content: center;
   align-items: center;
 }

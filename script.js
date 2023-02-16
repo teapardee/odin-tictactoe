@@ -7,15 +7,17 @@ const createPlayer = (position, name, marker) => {
 // Gameboard Module
 
 var gameBoard = (function () {
-  //Initialize variables & gameboard
-
+  //Cache DOM
   const gameContainer = document.getElementById('game-screen');
+
+  //Initialize variables & gameboard
   var game = [];
 
   _init();
 
   function _init() {
     playerOneTurn = true;
+    //Create Tiles
     for (i = 0; i < 9; i++) {
       game.push(' ');
       var gameTile = document.createElement('div');
@@ -115,6 +117,7 @@ var gameController = (function () {
     for (var i = 0; i < winningCombos.length; i++) {
       if (winningCombos[i].every((r) => markerPositions.includes(r))) {
         gameBoard.renderWinner(winningCombos[i]);
+        displayController.announceWinner();
         stopGame();
       }
     }
@@ -155,20 +158,45 @@ var gameController = (function () {
 // Display Controller
 
 var displayController = (function () {
-  const resetBtn = document.querySelector('.reset-btn');
+  //Intialize Variables
+  let showWinnerScreen = false;
+
+  //Cache DOM
+  const winnerScreen = document.getElementById('winner-screen');
+  const resetBtn = document.getElementById('reset-btn');
+  const replayBtn = document.getElementById('replay-btn');
 
   _init();
 
   function _init() {
     resetBtn.addEventListener('click', fullReset);
+    replayBtn.addEventListener('click', fullReset);
+  }
+
+  function _toggleWinnerScreen() {
+    showWinnerScreen = !showWinnerScreen;
+
+    if (showWinnerScreen === true) {
+      winnerScreen.style.display = 'flex';
+    } else {
+      winnerScreen.style.display = 'none';
+    }
+  }
+
+  function announceWinner() {
+    winnerScreen.style.display = 'flex';
+    resetBtn.style.display = 'none';
   }
 
   function fullReset() {
+    winnerScreen.style.display = 'none';
+    resetBtn.style.display = 'flex';
     gameController.resetGameController();
     gameBoard.resetGameBoard();
   }
 
   return {
     fullReset,
+    announceWinner,
   };
 })();
