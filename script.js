@@ -123,11 +123,14 @@ var gameController = (function () {
     }
   }
 
-  // function _checkForTie() {
-  //   for(i=0;i<9,i++){
-
-  //   }
-  // }
+  function _checkForTie() {
+    for (i = 0; i < 9; i++) {
+      if (gameBoard.checkTile(i) === true) {
+        return;
+      }
+    }
+    displayController.announceWinner();
+  }
 
   function stopGame() {
     winnerDeclared = true;
@@ -148,6 +151,7 @@ var gameController = (function () {
         gameBoard.updatePosition(indexNumber, 'O');
         _checkForWinner('O');
       }
+      _checkForTie();
       _toggleTurn();
     } else {
     }
@@ -171,16 +175,6 @@ var displayController = (function () {
   function _init() {
     resetBtn.addEventListener('click', fullReset);
     replayBtn.addEventListener('click', fullReset);
-  }
-
-  function _toggleWinnerScreen() {
-    showWinnerScreen = !showWinnerScreen;
-
-    if (showWinnerScreen === true) {
-      winnerScreen.style.display = 'flex';
-    } else {
-      winnerScreen.style.display = 'none';
-    }
   }
 
   function announceWinner() {
