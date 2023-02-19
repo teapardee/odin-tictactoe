@@ -8,7 +8,7 @@ const createPlayer = (position, name, marker) => {
 
 var gameBoard = (function () {
   //Cache DOM
-  const gameContainer = document.getElementById('game-screen');
+  const gameContainer = document.querySelector('.game-screen');
 
   //Initialize variables & gameboard
   var game = [];
@@ -166,8 +166,8 @@ var displayController = (function () {
   let playerTwo;
 
   //Cache DOM
-  const setupScreen = document.getElementById('setup-screen');
-  const winnerScreen = document.getElementById('winner-screen');
+  const setupScreen = document.querySelector('.setup-screen');
+  const winnerScreen = document.querySelector('.winner-screen');
   const resetBtn = document.getElementById('reset-btn');
   const replayBtn = document.getElementById('replay-btn');
   const beginBtn = document.getElementById('begin-btn');
@@ -181,8 +181,6 @@ var displayController = (function () {
   _init();
 
   function _init() {
-    setupScreen.style.display = 'flex';
-
     resetBtn.addEventListener('click', fullReset);
     replayBtn.addEventListener('click', fullReset);
     beginBtn.addEventListener('click', _submitSetup);
@@ -231,7 +229,7 @@ var displayController = (function () {
     if (playerOne !== undefined) {
       player1 = createPlayer(1, 'testName1', playerOne);
       player2 = createPlayer(2, 'testName2', playerTwo);
-      setupScreen.style.display = 'none';
+      setupScreen.classList.add('inactive');
       resetBtn.style.display = 'flex';
     } else {
       setupTitle.style.color = 'red';
@@ -241,12 +239,12 @@ var displayController = (function () {
   function announceWinner() {
     resetBtn.style.display = 'none';
     setTimeout(function () {
-      winnerScreen.style.display = 'flex';
+      winnerScreen.classList.remove('inactive');
     }, 500);
   }
 
   function fullReset() {
-    winnerScreen.style.display = 'none';
+    winnerScreen.classList.add('inactive');
     resetBtn.style.display = 'flex';
     gameController.resetGameController();
     gameBoard.resetGameBoard();
