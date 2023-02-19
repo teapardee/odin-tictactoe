@@ -172,6 +172,7 @@ var displayController = (function () {
   const replayBtn = document.getElementById('replay-btn');
   const beginBtn = document.getElementById('begin-btn');
   const setupTitle = document.getElementById('setup-title');
+  const changeTeam = document.getElementById('change-team');
   const p1x = document.getElementById('p1x');
   const p1o = document.getElementById('p1o');
   const p2x = document.getElementById('p2x');
@@ -181,7 +182,7 @@ var displayController = (function () {
 
   function _init() {
     setupScreen.style.display = 'flex';
-    resetBtn.style.display = 'none';
+
     resetBtn.addEventListener('click', fullReset);
     replayBtn.addEventListener('click', fullReset);
     beginBtn.addEventListener('click', _submitSetup);
@@ -196,6 +197,9 @@ var displayController = (function () {
     });
     p2o.addEventListener('click', (e) => {
       return _markerSelection(e);
+    });
+    changeTeam.addEventListener('click', () => {
+      window.location.reload();
     });
   }
 
@@ -228,6 +232,7 @@ var displayController = (function () {
       player1 = createPlayer(1, 'testName1', playerOne);
       player2 = createPlayer(2, 'testName2', playerTwo);
       setupScreen.style.display = 'none';
+      resetBtn.style.display = 'flex';
     } else {
       setupTitle.style.color = 'red';
     }

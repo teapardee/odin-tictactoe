@@ -176,6 +176,7 @@ h6 {
 }
 
 .reset {
+  display: none;
   margin-top: 1rem;
   height: 3vh;
   width: 10vh;
