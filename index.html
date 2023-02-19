@@ -13,6 +13,7 @@
     <h1>TIC TAC TOE</h1>
 
     <div id="main-wrapper">
+      <!-- Winner Screen -->
       <div id="winner-screen">
         <div>PLAYER 1 WINS</div>
         <div>
@@ -20,8 +21,9 @@
           ><button class="winner btn">Change Teams</button>
         </div>
       </div>
+      <!-- Setup Screen -->
       <div id="setup-screen">
-        <h6>SELECT YOUR MARKER</h6>
+        <h6 id="setup-title">SELECT YOUR MARKER</h6>
         <div class="setup-container">
           <div id="player-one">
             <h4>PLAYER 1</h4>
@@ -39,8 +41,9 @@
             </div>
           </div>
         </div>
-        <div class="begin btn">BEGIN MATCH</div>
+        <div id="begin-btn" class="begin btn">BEGIN MATCH</div>
       </div>
+      <!-- Game Screen -->
       <div id="game-screen"></div>
     </div>
 

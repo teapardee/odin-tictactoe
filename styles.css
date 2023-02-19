@@ -7,8 +7,10 @@
   font-size: 62.5%;
   font-family: 'Montserrat', sans-serif;
   letter-spacing: 2px;
-
+  --box-shadow-main: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  --box-shadow-secondary: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   --secondary-color: #2c323d;
+  --color-three: lightblue;
 }
 
 button {
@@ -41,6 +43,7 @@ h1 {
 #winner-screen {
   position: absolute;
   z-index: 1;
+  box-shadow: var(--box-shadow-main);
 }
 
 /* Gameboard */
@@ -52,6 +55,7 @@ h1 {
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
   gap: 5px;
   background-color: white;
+  box-shadow: var(--box-shadow-main);
 }
 
 .tiles {
@@ -111,7 +115,7 @@ h1 {
   align-items: center;
   min-height: 50vh;
   min-width: 70vh;
-  background-color: lightblue;
+  background-color: var(--color-three);
 }
 
 h4 {
@@ -164,6 +168,7 @@ h6 {
   font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
+  box-shadow: var(--box-shadow-secondary);
 }
 
 .btn:hover {

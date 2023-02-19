@@ -162,12 +162,16 @@ var gameController = (function () {
 // Display Controller
 
 var displayController = (function () {
-  //Cache DOM
+  let playerOne;
+  let playerTwo;
 
+  //Cache DOM
   const setupScreen = document.getElementById('setup-screen');
   const winnerScreen = document.getElementById('winner-screen');
   const resetBtn = document.getElementById('reset-btn');
   const replayBtn = document.getElementById('replay-btn');
+  const beginBtn = document.getElementById('begin-btn');
+  const setupTitle = document.getElementById('setup-title');
   const p1x = document.getElementById('p1x');
   const p1o = document.getElementById('p1o');
   const p2x = document.getElementById('p2x');
@@ -180,6 +184,7 @@ var displayController = (function () {
     resetBtn.style.display = 'none';
     resetBtn.addEventListener('click', fullReset);
     replayBtn.addEventListener('click', fullReset);
+    beginBtn.addEventListener('click', _submitSetup);
     p1x.addEventListener('click', (e) => {
       return _markerSelection(e);
     });
@@ -203,6 +208,8 @@ var displayController = (function () {
         p2o.className = 'tiles selected';
         p1o.className = 'tiles unselected';
         p2x.className = 'tiles unselected';
+        playerOne = 'X';
+        playerTwo = 'O';
         break;
       case 'p1o':
       case 'p2x':
@@ -210,7 +217,19 @@ var displayController = (function () {
         p2x.className = 'tiles selected';
         p1x.className = 'tiles unselected';
         p2o.className = 'tiles unselected';
+        playerOne = 'O';
+        playerTwo = 'X';
         break;
+    }
+  }
+
+  function _submitSetup() {
+    if (playerOne !== undefined) {
+      player1 = createPlayer(1, 'testName1', playerOne);
+      player2 = createPlayer(2, 'testName2', playerTwo);
+      setupScreen.style.display = 'none';
+    } else {
+      setupTitle.style.color = 'red';
     }
   }
 
