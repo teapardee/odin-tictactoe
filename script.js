@@ -91,6 +91,7 @@ var gameController = (function () {
 
   let playerOneTurn = '';
   let winnerDeclared = false;
+  let winner = '';
 
   const winningCombos = [
     [0, 1, 2],
@@ -114,7 +115,14 @@ var gameController = (function () {
     for (var i = 0; i < winningCombos.length; i++) {
       if (winningCombos[i].every((r) => markerPositions.includes(r))) {
         gameBoard.renderWinner(winningCombos[i]);
-        displayController.announceWinner();
+        console.log(activeMarker);
+        console.log(player1);
+        if (activeMarker == player1.marker) {
+          winner = 'Player 1';
+        } else {
+          winner = 'Player 2';
+        }
+        displayController.announceOutcome('win', winner);
         stopGame();
       }
     }
@@ -126,7 +134,7 @@ var gameController = (function () {
         return;
       }
     }
-    displayController.announceWinner();
+    displayController.announceOutcome('tie');
   }
 
   function stopGame() {
@@ -171,6 +179,7 @@ var displayController = (function () {
   const setupTitle = document.getElementById('setup-title');
   const changeTeam = document.getElementById('change-team');
   const gameboardWrapper = document.querySelector('.gameboard-wrapper');
+  const outcomeText = document.getElementById('outcome');
   const p1x = document.getElementById('p1x');
   const p1o = document.getElementById('p1o');
   const p2x = document.getElementById('p2x');
@@ -234,8 +243,14 @@ var displayController = (function () {
     }
   }
 
-  function announceWinner() {
+  function announceOutcome(outcome, winner) {
     resetBtn.style.visibility = 'hidden';
+    if (outcome === 'tie') {
+      outcomeText.innerHTML = "BUMMER, IT'S A DRAW!";
+    } else {
+      outcomeText.innerHTML = `${winner} WINS!`;
+    }
+
     setTimeout(function () {
       winnerScreen.classList.remove('inactive');
     }, 500);
@@ -249,7 +264,7 @@ var displayController = (function () {
   }
 
   return {
-    announceWinner,
+    announceOutcome,
     fullReset,
   };
 })();
