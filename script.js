@@ -7,17 +7,14 @@ const createPlayer = (position, name, marker) => {
 // Gameboard Module
 
 var gameBoard = (function () {
-  //Cache DOM
   const gameContainer = document.querySelector('.game-screen');
-
-  //Initialize variables & gameboard
   var game = [];
 
   _init();
 
   function _init() {
     playerOneTurn = true;
-    //Create Tiles
+    //Create Gameboard Tiles
     for (i = 0; i < 9; i++) {
       game.push(' ');
       var gameTile = document.createElement('div');
@@ -173,6 +170,7 @@ var displayController = (function () {
   const beginBtn = document.getElementById('begin-btn');
   const setupTitle = document.getElementById('setup-title');
   const changeTeam = document.getElementById('change-team');
+  const gameboardWrapper = document.querySelector('.gameboard-wrapper');
   const p1x = document.getElementById('p1x');
   const p1o = document.getElementById('p1o');
   const p2x = document.getElementById('p2x');
@@ -230,14 +228,14 @@ var displayController = (function () {
       player1 = createPlayer(1, 'testName1', playerOne);
       player2 = createPlayer(2, 'testName2', playerTwo);
       setupScreen.classList.add('inactive');
-      resetBtn.style.display = 'flex';
+      gameboardWrapper.classList.remove('inactive');
     } else {
       setupTitle.style.color = 'red';
     }
   }
 
   function announceWinner() {
-    resetBtn.style.display = 'none';
+    resetBtn.style.visibility = 'hidden';
     setTimeout(function () {
       winnerScreen.classList.remove('inactive');
     }, 500);
@@ -245,7 +243,7 @@ var displayController = (function () {
 
   function fullReset() {
     winnerScreen.classList.add('inactive');
-    resetBtn.style.display = 'flex';
+    resetBtn.style.visibility = 'visible';
     gameController.resetGameController();
     gameBoard.resetGameBoard();
   }

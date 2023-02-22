@@ -22,12 +22,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 h1 {
   display: flex;
   font-size: 5rem;
-  margin: 10rem 0 4rem 0;
 }
 
 /* Screens */
@@ -36,16 +36,15 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.setup-screen,
-.winner-screen {
-  position: absolute;
-  z-index: 1;
-  box-shadow: var(--box-shadow-main);
+  position: relative;
 }
 
 /* Gameboard */
+
+.gameboard-wrapper {
+  display: flex;
+  flex-direction: column;
+}
 
 .game-screen {
   display: grid;
@@ -94,7 +93,10 @@ h1 {
   min-height: 20vh;
   min-width: 60vh;
   color: white;
+  position: absolute;
+  z-index: 1;
   background-color: var(--secondary-color);
+  box-shadow: var(--box-shadow-main);
 }
 
 .winner-screen > div {
@@ -156,8 +158,6 @@ h6 {
 .button-wrapper {
   display: flex;
   justify-content: flex-end;
-  min-height: 50vh;
-  min-width: 50vh;
 }
 
 .btn {
@@ -175,7 +175,7 @@ h6 {
 }
 
 .reset {
-  display: none;
+  display: flex;
   margin-top: 1rem;
   height: 3vh;
   width: 10vh;
